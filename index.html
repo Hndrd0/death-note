@@ -11,6 +11,9 @@
     :root {
       --black: #000;
       --white: #fff;
+      --frame-border: 2px;
+      --emblem-size: 110px;
+      --emblem-offset: calc(-0.5 * var(--emblem-size) + 3px);
     }
 
     * { box-sizing: border-box; }
@@ -31,17 +34,17 @@
       width: min(92vw, 720px);
       margin: 3rem 1rem 4rem;
       padding: 4.6rem clamp(1.4rem, 4vw, 2.8rem) 3.2rem;
-      border: 2px solid var(--white);
+      border: var(--frame-border) solid var(--white);
       background: var(--black);
     }
 
     .emblem {
       position: absolute;
-      top: -52px;
+      top: var(--emblem-offset);
       left: 50%;
       transform: translateX(-50%);
-      width: 110px;
-      height: 110px;
+      width: var(--emblem-size);
+      height: var(--emblem-size);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -159,7 +162,7 @@
     <span class="corner corner-bl" aria-hidden="true">❧</span>
     <span class="corner corner-br" aria-hidden="true">❧</span>
     <div class="emblem" aria-hidden="true">
-      <svg viewBox="0 0 120 120" role="img" aria-label="Skull emblem">
+      <svg viewBox="0 0 120 120">
         <defs>
           <line id="ray" x1="60" y1="2" x2="60" y2="14" />
         </defs>
