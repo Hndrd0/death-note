@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Death Note — Rules</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=IM+Fell+English:ital@0;1&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1a130d;
+      --ink-soft: #2d2016;
+      --paper-a: #f2e6c5;
+      --paper-b: #e8d9b5;
+      --paper-c: #dcc79f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 2rem 1rem;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 50% 45%, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.72) 100%),
+        radial-gradient(circle at 20% 15%, #3d3a37 0%, #1d1b1a 42%, #0b0a09 100%);
+      font-family: "IM Fell English", "Noto Serif", serif;
+    }
+
+    .page {
+      position: relative;
+      width: min(92vw, 700px);
+      padding: clamp(1.25rem, 2.8vw, 2rem);
+      border-radius: 3px;
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.75), 0 2px 0 rgba(255, 242, 217, 0.35) inset;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(98, 76, 45, 0.18) 0,
+          rgba(98, 76, 45, 0.18) 1px,
+          rgba(0, 0, 0, 0) 1px,
+          rgba(0, 0, 0, 0) 31px
+        ),
+        radial-gradient(circle at 12% 8%, rgba(255, 250, 236, 0.7) 0, rgba(255, 250, 236, 0) 30%),
+        radial-gradient(circle at 88% 94%, rgba(120, 66, 34, 0.24) 0, rgba(120, 66, 34, 0) 38%),
+        linear-gradient(168deg, var(--paper-a) 0%, var(--paper-b) 45%, var(--paper-c) 100%);
+      filter: contrast(1.02) saturate(0.9);
+      overflow: hidden;
+      animation: pageFade 1.2s ease-out both;
+      color: var(--ink-soft);
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(0, 0, 0, 0.06) 0.6px, transparent 0.7px);
+      background-size: 3px 3px;
+      mix-blend-mode: multiply;
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .page::after {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      right: -1px;
+      bottom: -1px;
+      background: linear-gradient(145deg, rgba(255, 243, 215, 0.14) 0%, rgba(151, 118, 76, 0.35) 70%, rgba(55, 34, 19, 0.5) 100%);
+      clip-path: polygon(100% 0, 0 100%, 100% 100%);
+      filter: blur(0.2px);
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    .watermark {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: clamp(5rem, 18vw, 9rem);
+      color: rgba(134, 0, 0, 0.09);
+      transform: rotate(-15deg) translateY(0.5rem);
+      user-select: none;
+      pointer-events: none;
+      z-index: 0;
+      text-shadow: 0 0 25px rgba(106, 0, 0, 0.15);
+    }
+
+    h1 {
+      margin: 0 0 1rem;
+      text-align: center;
+      color: #211108;
+      font-family: "Creepster", "IM Fell English", serif;
+      font-size: clamp(2rem, 7vw, 3.2rem);
+      letter-spacing: 0.03em;
+      text-shadow: 0.5px 1px 0 rgba(255, 235, 215, 0.34), 1px 2px 0 rgba(25, 11, 7, 0.55);
+      transform: rotate(-1.1deg);
+      position: relative;
+      z-index: 1;
+    }
+
+    ol {
+      margin: 0;
+      padding-left: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    li {
+      margin: 0.45rem 0;
+      line-height: 1.42;
+      color: #2f2013;
+      font-size: clamp(0.94rem, 2.3vw, 1.05rem);
+      text-shadow: 0.5px 0.6px 0 rgba(50, 28, 16, 0.14);
+      opacity: 0;
+      transform: translateY(7px);
+      animation: inkIn 0.75s ease-out forwards;
+      animation-delay: calc(0.045s * var(--i));
+    }
+
+    li:nth-child(odd) { transform: translateY(7px) rotate(-0.22deg); }
+    li:nth-child(3n) { transform: translateY(7px) rotate(0.18deg); }
+
+    @keyframes pageFade {
+      from { opacity: 0; transform: translateY(12px) scale(0.995); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes inkIn {
+      from { opacity: 0; filter: blur(0.8px); }
+      to { opacity: 1; transform: translateY(0) rotate(0deg); filter: blur(0); }
+    }
+
+    @media (max-width: 640px) {
+      .page { padding: 1rem 0.95rem 1.2rem; }
+      ol { padding-left: 1.3rem; }
+      li { margin: 0.4rem 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" aria-label="Death Note rules notebook page">
+    <div class="watermark" aria-hidden="true">🍎</div>
+    <h1>Death Note — Rules</h1>
+    <ol id="rules"></ol>
+  </main>
+
+  <script>
+    const rules = [
+      "The human whose name is written in this note shall die.",
+      "A name only works when the writer has that person's face in mind; people sharing the same name are not affected.",
+      "If the cause of death is written within 40 seconds of the name, that cause occurs.",
+      "If no cause is written, the victim dies of a heart attack.",
+      "After specifying cause, the details must be written within 6 minutes and 40 seconds.",
+      "Once it reaches the human world, the Death Note becomes part of that world.",
+      "The owner can recognize the original owner (a Shinigami) by image and voice.",
+      "A human who uses the note can go to neither Heaven nor Hell.",
+      "If heart attack is the cause, the time of death can be controlled within 40 seconds.",
+      "Anyone who touches the notebook can see and hear its Shinigami owner, even if not the owner.",
+      "Whoever possesses the note is followed by its Shinigami until that person dies.",
+      "A Shinigami usually appears to a human user within 39 days after first use.",
+      "In principle, Shinigami do not help or prevent deaths written in the note.",
+      "Shinigami are not obliged to explain all notebook rules unless asked.",
+      "Shinigami can extend their own lives by writing names; humans cannot.",
+      "A human can shorten their own lifespan by using the note.",
+      "The owner can trade half their remaining lifespan for Shinigami Eyes.",
+      "Shinigami are not killed by ordinary weapons, though they can die by other means.",
+      "Death conditions fail if physically impossible for that person.",
+      "Death conditions also fail if unreasonably beyond what the victim could carry out.",
+      "Even Shinigami do not know all boundaries of valid conditions.",
+      "Any torn page or fragment still carries the note's full power.",
+      "Any writing instrument works if it can leave legible writing directly on the page.",
+      "Even original Shinigami owners do not fully understand every aspect of the note.",
+      "A victim can be made to die by accident after writing the name and a suitable condition.",
+      "A victim can also be made to die of disease with specific conditions.",
+      "Without a written death time, disease-related death follows a natural course.",
+      "With a specific time written, disease death can be timed if plausible.",
+      "After writing the cause and details, further details can be added only within 6 minutes and 40 seconds.",
+      "Even with only one name, the written circumstances can influence others if physically possible.",
+      "If influence would cause non-written people to die, only the written victim dies of heart attack.",
+      "A Death Note can be lent or ownership transferred.",
+      "The borrower can still use Shinigami Eyes if they made the eye trade.",
+      "Someone who receives only the notebook (not ownership) can still use it while in possession.",
+      "Multiple Death Notes can exist in the human world at the same time.",
+      "A person with Shinigami Eyes can see names and lifespans of humans in sight.",
+      "Lifespan numbers cannot be seen for oneself.",
+      "Lifespans cannot be seen for people younger than 780 days old.",
+      "Lifespans are not shown for those already fated to die in 12 minutes.",
+      "Lifespans are not shown for people who own a Death Note.",
+      "The owner can give up ownership to erase all memory related to the notebook.",
+      "Memories return upon touching the notebook again after prior ownership.",
+      "If ownership is abandoned without passing it, possession returns to the Shinigami.",
+      "A Shinigami Eye trade requires the human's lifespan to be over half at time of trade.",
+      "The eye trade cannot be canceled after completion.",
+      "Even after eye trade, remaining lifespan can still change by other factors.",
+      "If the notebook is lost or stolen, ownership is retained for 490 days unless ownership is renounced.",
+      "If the owner dies while possession is disputed, ownership passes to the current possessor.",
+      "A Death Note cannot be used to kill someone whose name is unknown.",
+      "A page copy made by ordinary means has no effect; only true notebook material works.",
+      "A Shinigami must not remain in the human world without a reason tied to the note.",
+      "A Shinigami may stay while their notebook has an active human possessor.",
+      "A Shinigami can write names to end human lives and gain that time, except when prohibited.",
+      "If a Shinigami intentionally uses the notebook to save a human life, the Shinigami dies.",
+      "A human cannot gain lifespan by causing death with the Death Note.",
+      "A Death Note user does not age less or gain lifespan from victims.",
+      "Only one Death Note is needed to write deaths; owning multiple notes is allowed.",
+      "If two entries target one person, the earliest valid one applies.",
+      "If the same name is written in multiple notes within 0.06 seconds, it is treated as simultaneous and the target does not die.",
+      "A notebook can be destroyed by burning or severe damage; unusable pages cannot work.",
+      "A Shinigami may reclaim their notebook when no valid human ownership remains.",
+      "The notebook affects humans only, not animals or plants.",
+      "Suicide is accepted as a valid cause if physically plausible.",
+      "Homicide can be written as a cause if all conditions are physically possible.",
+      "Deaths can be controlled up to 23 days in advance under normal limits.",
+      "If written details exceed what is possible, only the possible cause takes effect.",
+      "If both cause and details are impossible, death defaults to heart attack.",
+      "All humans eventually die, and after death they go to Mu (nothingness)."
+    ];
+
+    const list = document.getElementById("rules");
+    rules.forEach((rule, i) => {
+      const li = document.createElement("li");
+      li.textContent = rule;
+      li.style.setProperty("--i", i + 1);
+      list.appendChild(li);
+    });
+  </script>
+</body>
+</html>
