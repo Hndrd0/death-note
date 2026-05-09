@@ -82,6 +82,18 @@
       white-space: nowrap;
     }
 
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     .skull {
       letter-spacing: 0;
       font-size: 0.9em;
@@ -173,7 +185,8 @@
       </svg>
     </div>
     <h1 class="title">
-      <span class="title-text">DEA<span class="skull">☠</span>H&nbsp;N<span class="skull">☠</span>TE</span>
+      <span class="sr-only">Death Note</span>
+      <span class="title-text" aria-hidden="true">DEA<span class="skull">☠</span>H&nbsp;N<span class="skull">☠</span>TE</span>
     </h1>
     <p class="subtitle">How to Use It</p>
     <ol id="rules" class="rules"></ol>
