@@ -225,14 +225,16 @@
     ];
 
     const list = document.getElementById("rules");
-    const fragment = document.createDocumentFragment();
-    rules.forEach((rule, i) => {
-      const li = document.createElement("li");
-      li.textContent = rule;
-      li.style.setProperty("--i", i + 1);
-      fragment.appendChild(li);
-    });
-    list.appendChild(fragment);
+    if (list) {
+      const fragment = document.createDocumentFragment();
+      rules.forEach((rule, i) => {
+        const li = document.createElement("li");
+        li.textContent = rule;
+        li.style.setProperty("--i", i + 1);
+        fragment.appendChild(li);
+      });
+      list.appendChild(fragment);
+    }
   </script>
 </body>
 </html>
